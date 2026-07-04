@@ -12,6 +12,9 @@ ROOT = Path(__file__).resolve().parents[1]
 TEXT_EXTENSIONS = {
     ".md",
     ".py",
+    ".cpp",
+    ".hpp",
+    ".json",
     ".yml",
     ".yaml",
     ".txt",

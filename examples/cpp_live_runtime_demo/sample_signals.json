@@ -1,0 +1,29 @@
+[
+  {
+    "symbol": "NIFTY-FUT",
+    "segment": "derivatives",
+    "side": "BUY",
+    "timeframe": "1m",
+    "reference_price": 24050.25,
+    "quantity": 4,
+    "confidence": 0.71
+  },
+  {
+    "symbol": "BANK-SECTOR",
+    "segment": "cash",
+    "side": "SELL",
+    "timeframe": "5m",
+    "reference_price": 512.40,
+    "quantity": 180,
+    "confidence": 0.63
+  },
+  {
+    "symbol": "OIL-SENSITIVE-BASKET",
+    "segment": "cash",
+    "side": "BUY",
+    "timeframe": "1h",
+    "reference_price": 821.10,
+    "quantity": 500,
+    "confidence": 0.48
+  }
+]

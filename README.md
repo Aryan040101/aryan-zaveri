@@ -1,81 +1,82 @@
 # Aryan Zaveri
 
-**Quantitative Developer | Trading Systems | Research Infrastructure | Execution-Aware Research**
+**Quant Developer | Trading Systems | Research Infrastructure | Execution-Aware Systems**
 
 [LinkedIn](https://www.linkedin.com/in/aryan-zaveri0401/) · [Public CV](resume/Aryan_Zaveri_Quant_Developer.pdf)
 
-I build systems that bring market context, data, features, signals, risk and execution evidence into one research-to-execution workflow. My strongest work is in systematic trading infrastructure: starting from raw market data and broker mechanics, building research and validation layers, then connecting the surviving ideas to risk checks, order intents, execution journals and replay analytics.
+I build trading systems from the ground up: market data, feature engineering, strategy research, backtests, risk checks, order intent generation, execution tracking, replay, and post-trade analysis.
+
+My strongest work is end-to-end quant infrastructure. I use Python mainly for research, backtesting, analytics and reports. I use C++ for live/runtime systems where latency, memory use, sockets, queues, order state and risk authority matter. The systems communicate through JSON contracts, keep hot state in Redis, and persist historical/research state into PostgreSQL or Timescale-style stores.
 
 ## What I Build
 
-- **Research infrastructure:** market-data pipelines, feature stores, walk-forward studies, replay frameworks and validation reports.
-- **Trading systems:** broker/API workflows, order lifecycle tooling, risk gates, signal journals and execution-aware design.
-- **Cross-asset research:** Indian markets connected to global indices, sectors, oil, FX, macro context, options, futures and crypto risk appetite.
-- **Market-intelligence tooling:** context layers, dashboards, WebSocket/data contracts and research-facing interfaces.
-- **Evidence discipline:** clear separation between research, simulation, replay, paper/live activity and audited performance.
+- **Research and backtesting:** factor studies, feature pipelines, walk-forward tests, replay engines, simulation reports and metric extraction.
+- **Live trading runtime:** C++ sockets, order managers, risk managers, working-order state, execution journals, heartbeats and recovery loops.
+- **Risk authority:** one independent risk layer that controls global capital, segment capital, side limits, symbol limits, active order limits and hard exits.
+- **Adaptive execution:** quote freshness checks, spread/slippage gates, price leaning, replace/adjust loops, chunking, ladder exits and position-aware adjustments.
+- **Cross-market research:** linking Indian markets with global indices, crude oil, FX, macro data, sector themes, options/futures behavior and crypto risk appetite.
+- **Storage and state:** Redis for hot state and queues; PostgreSQL for durable candles, instruments, Greeks, analytics, snapshots and research outputs.
 
-## Runnable Public Demo
+This public repo uses sanitized descriptions and synthetic examples. It is meant to show architecture and engineering taste, not publish private strategy rules.
 
-This repository includes a sanitized research-to-execution demo using synthetic data and toy signal logic:
+## Public Examples
+
+### Python Research / Backtest Demo
+
+The Python example is deliberately offline. It shows how I think about completed-prior-data features, signal scoring, pre-trade risk, deterministic fills, fees, slippage, replay accounting and summary metrics.
 
 ```bash
 python3 examples/research_to_execution_demo/run_demo.py
 ```
 
-It demonstrates the system shape behind my work: lag-safe features, signal scoring, pre-trade risk, order intents, deterministic fills, fees, slippage, replay accounting and summary metrics. It is not Vajra source code, not real alpha and not live trading infrastructure.
+### C++ Live Runtime Shape
 
-Read the demo: [Research-To-Execution Demo](examples/research_to_execution_demo/README.md)
+The C++ example is a small public model of the live path: JSON signals, JSON risk contracts, an in-memory queue, an independent risk authority, adaptive order intent generation and execution journaling.
+
+```bash
+g++ -std=c++20 -O2 -pthread examples/cpp_live_runtime_demo/live_runtime_demo.cpp -o /tmp/live_runtime_demo
+/tmp/live_runtime_demo
+```
 
 ## Flagship Work: Vajra
 
-**Vajra** is my personal multi-asset quant research and execution platform. It is not a company and this repository does not expose proprietary strategy rules.
+**Vajra** is my personal multi-asset research and trading infrastructure platform. It is not a company.
 
-The purpose of Vajra is to connect markets rather than look at one instrument in isolation: global indices, sector leaders, US/China/Japan/Korea market context, crude oil, FX, Indian macro conditions, options/futures behavior and crypto risk appetite all become inputs into systematic research. The platform is built from ground level across data ingestion, feature engineering, cross-market relationship analysis, signal scoring, risk decisions, order intents, execution journals, replay and post-trade analytics.
+The goal behind Vajra is to avoid looking at one instrument in isolation. A model should be able to reason across seconds, minutes, hours, days, weeks and months. It should connect Indian sectors with oil, global markets, US/China/Japan/Korea sector behavior, domestic macro, global macro, volatility, options/futures structure and broader risk appetite.
 
-Evidence includes:
+The work is about quantifying relationships, testing whether they survive history, simulating them under realistic costs, and then connecting the surviving ideas to risk and execution systems. That includes buying weakness, selling strength, finding themes, tracking cross-asset confirmation, and turning those views into rules that can be backtested, replayed and implemented.
 
-- rolling walk-forward equity/futures research with completed-prior-data discipline;
-- multi-year simulation reports with trade counts, win rate, profit factor, drawdown and capital tracking;
-- crypto live/replay infrastructure with signal, risk-decision, order-intent and execution journals;
-- fee-aware replay, paper-fill and execution-variant studies;
-- public-safe architecture and evidence notes in this repository.
+The public version focuses on the engineering shape:
 
-Read the case study: [Vajra Personal Research Platform](case-studies/vajra.md)
+- Python research, feature engineering and backtesting.
+- C++ live sockets, `socket.cpp` / `risk.cpp` style components, order managers and execution runtimes.
+- JSON contracts between research, risk, execution and journals.
+- Redis streams, queues, hashes and heartbeats for hot state.
+- PostgreSQL writers for instruments, candles, Greeks, snapshots and reports.
+- Single risk authority for capital, segment, side, symbol and active-order controls.
 
 ## Professional Experience
 
 ### GreyOak Capital — Quantitative Developer
 
-Work on quantitative research systems, market-intelligence infrastructure and research-facing tooling. Public-safe context includes Horizon, Compass, Context-Intelligence and Ask-GreyOak as market-intelligence surfaces involving context layers, dashboard/runtime flows, WebSocket/data contracts and research interfaces.
-
-Sensitive implementation details, endpoints, internal data and proprietary workflows are intentionally omitted.
+I work on quantitative research systems, market-intelligence infrastructure and research-facing tooling. Public-safe areas include Horizon, Compass, Context-Intelligence and Ask-GreyOak: systems that bring market context, internal data flows, dashboards, WebSocket/data contracts and analyst-facing interfaces together.
 
 ### KIFS Trade Capital — Quantitative / Algorithmic Trading Development
 
-Worked across algorithmic trading development, broker/API workflows, intraday market-data processing, options analytics and F2F conversion/reversion research. Exposure included tick/depth data, order lifecycle mechanics, execution constraints, latency-aware trading-system design and trade-quality analytics.
+Worked across algorithmic trading development, broker/API workflows, intraday market-data processing, options analytics and F2F conversion/reversion research. The work gave me strong exposure to order lifecycle mechanics, tick/depth data, execution constraints, latency-aware design, risk checks and trade-quality analysis.
 
 ### Greeksoft Technologies — Algorithmic Trading Internship
 
-Worked around broker-facing algo-trading platform workflows, including broker mechanics, authentication, instrument mapping, market data, order placement, order status and execution flow.
-
-Read the public-safe summary: [Professional Experience](case-studies/professional-experience.md)
+Worked around broker-facing algo-trading platform workflows: how brokers connect, how instruments are mapped, how market data arrives, how orders are placed, how order status is tracked and how execution flow is represented in a platform.
 
 ## Technical Stack
 
-Python · C++ · SQL · Shell · JavaScript · Linux · AWS · Git · Docker · Redis · PostgreSQL · SQLite · WebSockets · REST APIs · JSONL journals · market data · backtesting · replay · pre-trade risk · order lifecycle · execution analytics
+Python · C++ · SQL · Shell · Linux · AWS · Git · Docker · Redis · PostgreSQL · WebSockets · REST APIs · JSON contracts · market data · backtesting · replay · pre-trade risk · order lifecycle · execution analytics
 
-## Evidence Standard
+## Deeper Technical Notes
 
-I do not claim audited institutional alpha or audited live performance from public research artifacts. I separate:
+Read [SYSTEMS.md](SYSTEMS.md) for the technical breakdown of the research layer, C++ live runtime, risk authority, Redis/Postgres design, adaptive execution and current improvement roadmap.
 
-- research;
-- simulation;
-- replay;
-- paper/live system activity;
-- audited live performance.
+## Current Direction
 
-The goal of this repository is to show engineering and research capability without exposing credentials, broker identifiers, raw logs, order IDs, employer-sensitive implementation details or proprietary alpha logic.
-
-Read the policy: [Evidence Policy](evidence/evidence-policy.md)
-
-Read the public evidence register: [Public Evidence Register](evidence/public-evidence-register.md)
+I am optimizing for quant developer and research engineering roles where the work needs both market understanding and production-quality systems thinking: building models, testing them, wiring them into risk-aware execution, and knowing exactly where research ends and live trading begins.

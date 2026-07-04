@@ -1,0 +1,8 @@
+{
+  "global_capital_limit": 1000000,
+  "cash_segment_limit": 350000,
+  "derivatives_segment_limit": 500000,
+  "max_order_notional": 125000,
+  "min_confidence": 0.56,
+  "max_slippage_bps": 6
+}

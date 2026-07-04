@@ -27,6 +27,7 @@ This repo is a public portfolio version: runnable code, architecture notes and r
 ## Code Map
 
 - [examples/cpp_trading_runtime/](examples/cpp_trading_runtime): modular C++20 runtime with hot state, risk authority, order manager, worker queues, adaptive pricing and journals.
+- [examples/python_research_system/](examples/python_research_system): modular Python research system with market data, features, signals, validation, risk, portfolio, execution, replay and reports.
 - [architecture/quant_systems_showcase.md](architecture/quant_systems_showcase.md): Python/C++ system architecture and data flow.
 - [examples/research_to_execution_demo/](examples/research_to_execution_demo): Python research-to-execution replay with synthetic market data, lag-safe features, risk checks, fills and lifecycle events.
 - [examples/cpp_live_runtime_demo/](examples/cpp_live_runtime_demo): compact single-file C++ queue/risk/order runtime demo.
@@ -34,15 +35,23 @@ This repo is a public portfolio version: runnable code, architecture notes and r
 
 ## Public Examples
 
-### Python Research / Backtest Demo
+### Python Research System
 
-The Python example is deliberately offline. It shows how I think about completed-prior-data features, signal scoring, pre-trade risk, deterministic fills, fees, slippage, replay accounting, portfolio state and JSON lifecycle events.
+The modular Python example is the main research/control-plane showcase. It splits the workflow into market data, lag-safe features, signal scoring, walk-forward validation, risk, portfolio accounting, execution simulation, replay and reporting.
+
+```bash
+python3 examples/python_research_system/run_system.py | python3 -m json.tool
+```
+
+The larger Python shape includes research scripts, feature builders, options model pipelines, equity/futures portfolio analysis, crypto movement/relationship engines, Redis/Postgres data services, FastAPI-style monitors and scheduled reporting jobs.
+
+### Compact Python Research / Backtest Demo
+
+The compact Python example is deliberately offline. It shows completed-prior-data features, signal scoring, pre-trade risk, deterministic fills, fees, slippage, replay accounting, portfolio state and lifecycle events.
 
 ```bash
 python3 examples/research_to_execution_demo/run_demo.py | python3 -m json.tool
 ```
-
-The larger Python shape includes research scripts, feature builders, options model pipelines, equity/futures portfolio analysis, crypto movement/relationship engines, Redis/Postgres data services, FastAPI-style monitors and scheduled reporting jobs.
 
 ### C++ Trading Runtime Demo
 

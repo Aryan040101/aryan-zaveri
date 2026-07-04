@@ -19,8 +19,14 @@ jobs:
       - name: Run demo tests
         run: python -m unittest discover examples/research_to_execution_demo/tests
 
+      - name: Run Python research-system tests
+        run: python -m unittest discover examples/python_research_system/tests
+
       - name: Run synthetic demo
         run: python examples/research_to_execution_demo/run_demo.py
+
+      - name: Run Python research system
+        run: python examples/python_research_system/run_system.py | python -m json.tool > /tmp/python_research_system.json
 
       - name: Build C++ live runtime demo
         run: g++ -std=c++20 -O2 -Wall -Wextra -pedantic -pthread examples/cpp_live_runtime_demo/live_runtime_demo.cpp -o /tmp/live_runtime_demo

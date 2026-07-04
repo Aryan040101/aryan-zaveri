@@ -9,10 +9,12 @@ market archives / synthetic market frames
         |
         v
 Python research layer
+  - market data
   - feature engineering
   - signal scoring
-  - backtest / replay
-  - portfolio state
+  - walk-forward validation
+  - risk / portfolio simulation
+  - replay
   - reports and dashboards
         |
         v
@@ -44,15 +46,19 @@ post-trade evidence
 
 ## Python Layer
 
-Python owns the research and control-plane surface:
+Python owns the research and control-plane surface. The main public example is `examples/python_research_system/`, which uses a modular layout:
 
-- build lag-safe features from market and context inputs;
-- generate synthetic signals from feature snapshots;
-- run deterministic replay with fees, slippage and position accounting;
-- evaluate pre-trade risk before order intent creation;
-- output lifecycle events that resemble production logs without exposing real strategy rules.
+- `market_data.py` generates deterministic multi-market context;
+- `features.py` builds lag-safe cross-market features;
+- `signals.py` turns feature rows into scored signal candidates;
+- `validation.py` runs walk-forward threshold selection;
+- `risk.py` owns pre-trade approval/rejection;
+- `portfolio.py` tracks equity, drawdown and positions;
+- `execution.py` builds intents and simulates fills;
+- `replay.py` ties signal, risk, execution and portfolio accounting together;
+- `reports.py` assembles the research report.
 
-The public demo is in `examples/research_to_execution_demo/`.
+The compact Python replay remains in `examples/research_to_execution_demo/` for quick inspection.
 
 ## Message Layer
 

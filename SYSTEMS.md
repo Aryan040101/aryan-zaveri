@@ -41,6 +41,7 @@ This lets research move quickly without hiding live-trading responsibilities ins
 
 The public repo now mirrors that split in code:
 
+- Modular Python research system: `examples/python_research_system/`
 - Python lifecycle replay: `examples/research_to_execution_demo/`
 - Modular C++ trading runtime: `examples/cpp_trading_runtime/`
 - Compact C++ runtime demo: `examples/cpp_live_runtime_demo/`
@@ -60,7 +61,9 @@ The boundary is intentional: Python can research and simulate; C++ should own th
 
 In my own naming, the live path maps naturally to components like `socket.cpp`, `risk.cpp`, order manager, risk manager, Redis writers/readers and PostgreSQL writers. The public example keeps the same shape: JSON in, risk authority, order intent, execution event, JSON out.
 
-The public C++ examples now include both a compact single-file demo and a modular runtime layout with hot state, risk authority, order manager, worker queues, adaptive pricing, fills and journals.
+The public Python examples now include both a compact replay demo and a modular research-system layout with market data, feature generation, signal scoring, walk-forward validation, independent risk, portfolio accounting, execution simulation, replay and reporting.
+
+The public C++ examples include both a compact single-file demo and a modular runtime layout with hot state, risk authority, order manager, worker queues, adaptive pricing, fills and journals.
 
 ## C++ Runtime Inventory
 

@@ -42,18 +42,11 @@ g++ -std=c++20 -O2 -pthread examples/cpp_live_runtime_demo/live_runtime_demo.cpp
 
 **Vajra** is my personal multi-asset research and trading infrastructure platform. It is not a company.
 
-The goal behind Vajra is to avoid looking at one instrument in isolation. A model should be able to reason across seconds, minutes, hours, days, weeks and months. It should connect Indian sectors with oil, global markets, US/China/Japan/Korea sector behavior, domestic macro, global macro, volatility, options/futures structure and broader risk appetite.
+The core idea is simple: markets do not move in isolation. Vajra is built to connect Indian sectors, global indices, crude oil, FX, macro context, options/futures structure and broader risk appetite into models that can be researched, backtested, replayed and wired into risk-aware execution.
 
-The work is about quantifying relationships, testing whether they survive history, simulating them under realistic costs, and then connecting the surviving ideas to risk and execution systems. That includes buying weakness, selling strength, finding themes, tracking cross-asset confirmation, and turning those views into rules that can be backtested, replayed and implemented.
+The public version focuses on the architecture: Python for research and backtesting, C++ for live sockets/risk/order runtimes, JSON contracts between components, Redis for hot state, PostgreSQL for durable storage and a single risk authority before execution.
 
-The public version focuses on the engineering shape:
-
-- Python research, feature engineering and backtesting.
-- C++ live sockets, `socket.cpp` / `risk.cpp` style components, order managers and execution runtimes.
-- JSON contracts between research, risk, execution and journals.
-- Redis streams, queues, hashes and heartbeats for hot state.
-- PostgreSQL writers for instruments, candles, Greeks, snapshots and reports.
-- Single risk authority for capital, segment, side, symbol and active-order controls.
+The point is not to show one isolated strategy. It is to show that I can quantify relationships, test them, simulate them with costs, and connect the surviving ideas to execution systems.
 
 ## Professional Experience
 

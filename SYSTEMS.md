@@ -26,7 +26,7 @@ Live systems should be small, fast and explicit. My preference is:
 
 The boundary is intentional: Python can research and simulate; C++ should own the live loop.
 
-In my own naming, the live path maps naturally to components like `socket.cpp`, `risk.cpp`, order manager, risk manager, Redis writers/readers and PostgreSQL writers. The exact code is private, but the public example keeps the same shape: JSON in, risk authority, order intent, execution event, JSON out.
+In my own naming, the live path maps naturally to components like `socket.cpp`, `risk.cpp`, order manager, risk manager, Redis writers/readers and PostgreSQL writers. The public example keeps the same shape: JSON in, risk authority, order intent, execution event, JSON out.
 
 ## Risk Authority
 
@@ -89,15 +89,6 @@ At Greeksoft, I worked around broker-facing algo-trading platform workflows: bro
 
 ## What This Repo Is Trying To Show
 
-I want this repo to show that I can bring the full chain together:
+I want this repo to show the full chain: hypothesis, data, features, backtest, risk decision, order intent, execution or replay, and measurement.
 
-1. Form a market hypothesis.
-2. Quantify it with features and data.
-3. Backtest and simulate it with costs.
-4. Convert it into a risk-aware signal.
-5. Pass it through an independent risk authority.
-6. Generate an order intent.
-7. Execute or simulate execution.
-8. Replay the lifecycle and measure what happened.
-
-That is the skill I am trying to build toward: not just writing strategies, and not just writing infrastructure, but connecting research, risk and execution into one system.
+That is the skill I am building toward: not just writing strategies, and not just writing infrastructure, but connecting research, risk and execution into one system.

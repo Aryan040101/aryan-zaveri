@@ -1,6 +1,6 @@
 # Systems Notes
 
-This page is the compact technical version of how I think about quant infrastructure. The public examples are synthetic, but the architecture reflects the systems I have worked on: research first, then risk, then execution.
+This page is the compact technical version of how I think about quant infrastructure: research first, then risk, then execution.
 
 ## Research Layer
 
@@ -19,14 +19,27 @@ The research idea is broad by design. I want models that understand what is happ
 
 Live systems should be small, fast and explicit. My preference is:
 
-- **C++ for live runtime:** sockets, order managers, risk managers, private-stream handlers, execution engines and hot-path state.
+- **C++ for live runtime:** market sockets, private-stream handlers, order managers, risk managers, position trackers, signal bridges, execution engines and hot-path state.
 - **JSON contracts:** signals, risk decisions, order intents, execution events, position snapshots and journals.
 - **Redis for hot state:** streams, queues, market data hashes, depth snapshots, positions, working orders and heartbeats.
-- **PostgreSQL for durable state:** instruments, candles, Greeks, snapshots, reports, research outputs and EOD flushes.
+- **PostgreSQL for durable state:** instruments, candles, Greeks, snapshots, reports, order/position history, research outputs and EOD flushes.
 
 The boundary is intentional: Python can research and simulate; C++ should own the live loop.
 
 In my own naming, the live path maps naturally to components like `socket.cpp`, `risk.cpp`, order manager, risk manager, Redis writers/readers and PostgreSQL writers. The public example keeps the same shape: JSON in, risk authority, order intent, execution event, JSON out.
+
+## C++ Runtime Inventory
+
+The C++ work is best understood as a set of cooperating runtime services, not one script:
+
+- **Socket layer:** exchange market sockets, broker/private sockets, reconnect loops, heartbeat handling, depth/top-of-book state, JSON snapshots and event journals.
+- **Risk layer:** independent risk manager/risk-governor processes that read signal intent, live positions, account context, market state and capital constraints before approving, resizing or rejecting action.
+- **Order layer:** order manager and smart-execution style flows that consume approved intents, check quote freshness and slippage, maintain working-order state and write order/execution journals.
+- **State layer:** Redis streams/hashes for hot market state, active orders, positions, heartbeats and inter-process queues; PostgreSQL writers for durable records that should not sit in the execution path.
+- **Research-to-live layer:** replay/parity tools, live-matrix scoring, paper-fill simulation, exit replay, strategy contract promotion and weekly rule/model tooling.
+- **Deployment layer:** CMake-built services, Linux/systemd process boundaries, memory guard behavior, runtime logs and operational heartbeats.
+
+The design goal is to keep each process narrow. A socket process should not decide portfolio risk. A strategy should not bypass the risk authority. A database writer should not block order routing.
 
 ## Risk Authority
 
@@ -65,6 +78,36 @@ For exits, the same idea applies: take-profit, stop-loss, trailing exits, hard e
 
 The same framework should support adaptive entries and exits across timeframes: a signal can express urgency and confidence, risk can resize or reject it, and execution can adjust price, quantity or timing based on current liquidity and state.
 
+## Order And Risk Flow
+
+The flow I aim for is:
+
+```text
+market data / features
+        |
+        v
+signal candidate
+        |
+        v
+risk authority
+        |
+        +--> reject / resize / wait
+        |
+        v
+order intent
+        |
+        v
+order manager / execution engine
+        |
+        v
+exchange or broker path
+        |
+        v
+fills, rejects, positions, PnL, replay journals
+```
+
+This is why the C++ layer matters. The live path needs clear ownership of sockets, queueing, active memory state, risk decisions, order state and journaled outcomes.
+
 ## Low-Latency and Memory Discipline
 
 The goal is not to call everything "HFT." The goal is to design live systems that respect latency and state.
@@ -75,6 +118,8 @@ Techniques I use or design around:
 - keep Redis as the hot shared state layer rather than querying a database in the execution path;
 - use queues/streams to decouple market data, risk and order execution;
 - use C++ atomics, mutexes and worker loops where live components need concurrency;
+- use small process-local caches for instruments, quotes, risk contracts and active orders;
+- keep order/risk communication event-driven through streams and explicit JSON contracts;
 - batch or flush durable writes outside the hot path;
 - keep JSON contracts small and explicit;
 - use heartbeats and state snapshots so broken processes are visible quickly.

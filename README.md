@@ -8,16 +8,18 @@ I build trading systems from the ground up: market data, feature engineering, st
 
 My strongest work is end-to-end quant infrastructure. I use Python mainly for research, backtesting, analytics and reports. I use C++ for live/runtime systems where latency, memory use, sockets, queues, order state and risk authority matter. The systems communicate through JSON contracts, keep hot state in Redis, and persist historical/research state into PostgreSQL or Timescale-style stores.
 
+The C++ side is not a small add-on. It is the live/runtime layer: market sockets, private order sockets, risk managers, order managers, signal bridges, position trackers, Redis hot-state workers, PostgreSQL writers, replay/parity tools and service processes that can run under Linux/systemd.
+
 ## What I Build
 
 - **Research and backtesting:** factor studies, feature pipelines, walk-forward tests, replay engines, simulation reports and metric extraction.
-- **Live trading runtime:** C++ sockets, order managers, risk managers, working-order state, execution journals, heartbeats and recovery loops.
+- **Live trading runtime:** C++ socket handlers, private streams, order managers, risk managers, working-order state, execution journals, heartbeats, recovery loops and service daemons.
 - **Risk authority:** one independent risk layer that controls global capital, segment capital, side limits, symbol limits, active order limits and hard exits.
 - **Adaptive execution:** quote freshness checks, spread/slippage gates, price leaning, replace/adjust loops, chunking, ladder exits and position-aware adjustments.
 - **Cross-market research:** linking Indian markets with global indices, crude oil, FX, macro data, sector themes, options/futures behavior and crypto risk appetite.
-- **Storage and state:** Redis for hot state and queues; PostgreSQL for durable candles, instruments, Greeks, analytics, snapshots and research outputs.
+- **Storage and state:** Redis streams/hashes for hot state and queues; PostgreSQL writers for durable candles, instruments, Greeks, analytics, snapshots and research outputs.
 
-This public repo uses sanitized descriptions and synthetic examples. It is meant to show architecture and engineering taste, not publish private strategy rules.
+This repo is a public portfolio version: architecture notes, compact demos and resumes that focus on systems design, engineering judgment and research-to-execution thinking.
 
 ## Public Examples
 
@@ -38,6 +40,8 @@ g++ -std=c++20 -O2 -pthread examples/cpp_live_runtime_demo/live_runtime_demo.cpp
 /tmp/live_runtime_demo
 ```
 
+The larger runtime shape behind this is closer to a production trading stack: socket processes, risk manager, order manager, market-state cache, Redis stream consumers, PostgreSQL persistence, heartbeats, snapshots, replay tooling and Linux services.
+
 ## Flagship Work: Vajra
 
 **Vajra** is my personal multi-asset research and trading infrastructure platform. It is not a company.
@@ -52,7 +56,7 @@ The point is not to show one isolated strategy. It is to show that I can quantif
 
 ### GreyOak Capital — Quantitative Developer
 
-I work on quantitative research systems, market-intelligence infrastructure and research-facing tooling. Public-safe areas include Horizon, Compass, Context-Intelligence and Ask-GreyOak: systems that bring market context, internal data flows, dashboards, WebSocket/data contracts and analyst-facing interfaces together.
+I work on quantitative research systems, market-intelligence infrastructure and research-facing tooling. My work touches Horizon, Compass, Context-Intelligence and Ask-GreyOak style systems that bring market context, internal data flows, dashboards, WebSocket/data contracts and analyst-facing interfaces together.
 
 ### KIFS Trade Capital — Quantitative / Algorithmic Trading Development
 

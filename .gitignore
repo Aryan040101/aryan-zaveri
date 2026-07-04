@@ -1,0 +1,34 @@
+# Local/runtime artifacts
+.env
+.env.*
+*.db
+*.sqlite
+*.sqlite3
+*.log
+*.jsonl
+*.csv
+*.tsv
+*.parquet
+*.pkl
+*.pickle
+*.zip
+*.tar
+*.tar.gz
+
+# Python / JS caches
+__pycache__/
+*.pyc
+node_modules/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# Private material
+secrets/
+private/
+raw-data/
+logs/
+credentials/
+

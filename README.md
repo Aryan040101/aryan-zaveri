@@ -6,13 +6,16 @@
 
 I build trading systems from the ground up: market data, feature engineering, strategy research, backtests, risk checks, order intent generation, execution tracking, replay, and post-trade analysis.
 
-My strongest work is end-to-end quant infrastructure. I use Python mainly for research, backtesting, analytics and reports. I use C++ for live/runtime systems where latency, memory use, sockets, queues, order state and risk authority matter. The systems communicate through JSON contracts, keep hot state in Redis, and persist historical/research state into PostgreSQL or Timescale-style stores.
+My strongest work is end-to-end quant infrastructure. I use Python for the research and control-plane layer: data loading, feature engineering, signal research, ML-style experiments, backtesting, walk-forward validation, replay, reporting, monitoring and orchestration. I use C++ for live/runtime systems where latency, memory use, sockets, queues, order state and risk authority matter. The systems communicate through JSON contracts, keep hot state in Redis, and persist historical/research state into PostgreSQL or Timescale-style stores.
 
 The C++ side is not a small add-on. It is the live/runtime layer: market sockets, private order sockets, risk managers, order managers, signal bridges, position trackers, Redis hot-state workers, PostgreSQL writers, replay/parity tools and service processes that can run under Linux/systemd.
+
+The Python side is also substantial. It is where I build feature tables, model pipelines, options/equity/crypto research flows, no-lookahead backtests, walk-forward studies, risk grids, portfolio comparisons, dashboards, data repair jobs, Redis/Postgres writers and operational monitors.
 
 ## What I Build
 
 - **Research and backtesting:** factor studies, feature pipelines, walk-forward tests, replay engines, simulation reports and metric extraction.
+- **Python research systems:** pandas/numpy feature pipelines, model training, threshold search, no-lookahead validation, replay, dashboards, state writers and research reports.
 - **Live trading runtime:** C++ socket handlers, private streams, order managers, risk managers, working-order state, execution journals, heartbeats, recovery loops and service daemons.
 - **Risk authority:** one independent risk layer that controls global capital, segment capital, side limits, symbol limits, active order limits and hard exits.
 - **Adaptive execution:** quote freshness checks, spread/slippage gates, price leaning, replace/adjust loops, chunking, ladder exits and position-aware adjustments.
@@ -31,6 +34,8 @@ The Python example is deliberately offline. It shows how I think about completed
 python3 examples/research_to_execution_demo/run_demo.py
 ```
 
+The larger Python shape includes research scripts, feature builders, options model pipelines, equity/futures portfolio analysis, crypto movement/relationship engines, Redis/Postgres data services, FastAPI-style monitors and scheduled reporting jobs.
+
 ### C++ Live Runtime Shape
 
 The C++ example is a small public model of the live path: JSON signals, JSON risk contracts, an in-memory queue, an independent risk authority, adaptive order intent generation and execution journaling.
@@ -48,7 +53,7 @@ The larger runtime shape behind this is closer to a production trading stack: so
 
 The core idea is simple: markets do not move in isolation. Vajra is built to connect Indian sectors, global indices, crude oil, FX, macro context, options/futures structure and broader risk appetite into models that can be researched, backtested, replayed and wired into risk-aware execution.
 
-The public version focuses on the architecture: Python for research and backtesting, C++ for live sockets/risk/order runtimes, JSON contracts between components, Redis for hot state, PostgreSQL for durable storage and a single risk authority before execution.
+The public version focuses on the architecture: Python for research, validation, analytics, monitoring and orchestration; C++ for live sockets/risk/order runtimes; JSON contracts between components; Redis for hot state; PostgreSQL for durable storage; and a single risk authority before execution.
 
 The point is not to show one isolated strategy. It is to show that I can quantify relationships, test them, simulate them with costs, and connect the surviving ideas to execution systems.
 
@@ -68,11 +73,11 @@ Worked around broker-facing algo-trading platform workflows: how brokers connect
 
 ## Technical Stack
 
-Python · C++ · SQL · Shell · Linux · AWS · Git · Docker · Redis · PostgreSQL · WebSockets · REST APIs · JSON contracts · market data · backtesting · replay · pre-trade risk · order lifecycle · execution analytics
+Python · pandas · numpy · scikit-learn style workflows · C++ · SQL · Shell · Linux · AWS · Git · Docker · Redis · PostgreSQL · FastAPI-style services · WebSockets · REST APIs · JSON contracts · market data · backtesting · replay · pre-trade risk · order lifecycle · execution analytics
 
 ## Deeper Technical Notes
 
-Read [SYSTEMS.md](SYSTEMS.md) for the technical breakdown of the research layer, C++ live runtime, risk authority, Redis/Postgres design, adaptive execution and current improvement roadmap.
+Read [SYSTEMS.md](SYSTEMS.md) for the technical breakdown of the Python research layer, C++ live runtime, risk authority, Redis/Postgres design, adaptive execution and current improvement roadmap.
 
 ## Current Direction
 

@@ -19,7 +19,7 @@ endobj
 << /Type /Annot /Subtype /Link /Rect [38.00 726.10 210.58 736.30] /Border [0 0 0] /A << /S /URI /URI (https://github.com/Aryan040101/aryan-zaveri) >> >>
 endobj
 7 0 obj
-<< /Length 5846 >>
+<< /Length 6885 >>
 stream
 BT /F2 13.50 Tf 38.00 754.00 Td (ARYAN ZAVERI) Tj ET
 BT /F1 8.40 Tf 38.00 744.09 Td (Quant Developer | Trading Systems | Research Infrastructure | Execution) Tj ET
@@ -53,23 +53,32 @@ BT /F1 7.00 Tf 38.00 499.18 Td (- Worked around broker-facing algorithmic tradin
 BT /F1 7.00 Tf 50.00 490.92 Td (  and execution flow.) Tj ET
 BT /F1 7.00 Tf 38.00 482.66 Td (- Gained practical exposure to how broker APIs, authentication, market-data subscriptions and order-state transitions fit inside an algo-trading) Tj ET
 BT /F1 7.00 Tf 50.00 474.40 Td (  platform.) Tj ET
-BT /F2 8.00 Tf 38.00 460.80 Td (C++ TRADING RUNTIME) Tj ET
-BT /F1 7.00 Tf 38.00 452.54 Td (- Built C++ live components for market/private sockets, order execution, position tracking, risk management, signal bridges, hot-state daemons and) Tj ET
-BT /F1 7.00 Tf 50.00 444.28 Td (  replay/parity tooling.) Tj ET
-BT /F1 7.00 Tf 38.00 436.02 Td (- Used Boost.Asio/Beast/OpenSSL, nlohmann::json, CMake, threads, atomics, mutexes, hiredis and libpq-style integrations across live/runtime paths.) Tj ET
-BT /F1 7.00 Tf 38.00 427.76 Td (- Implemented order preflight and smart-execution flows: account/instrument probes, Redis quote checks, quote freshness, slippage gates, duplicate-intent) Tj ET
-BT /F1 7.00 Tf 50.00 419.50 Td (  checks and exchange journals.) Tj ET
-BT /F1 7.00 Tf 38.00 411.24 Td (- Designed low-latency state handling with Redis streams/hashes, in-memory working-order state, heartbeats, atomic JSON snapshots and durable PostgreSQL) Tj ET
-BT /F1 7.00 Tf 50.00 402.98 Td (  writes outside the execution path.) Tj ET
-BT /F2 8.00 Tf 38.00 389.38 Td (SELECTED PROJECT - VAJRA) Tj ET
-BT /F1 7.00 Tf 38.00 381.12 Td (- Built a personal multi-asset research/trading platform connecting Indian sectors, global indices, crude oil, FX, macro context, options/futures) Tj ET
-BT /F1 7.00 Tf 50.00 372.86 Td (  structure and crypto risk appetite.) Tj ET
-BT /F1 7.00 Tf 38.00 364.60 Td (- Implemented the research-to-execution loop: market data archive, feature engineering, signal ranking, risk decision, order intent, execution journal,) Tj ET
-BT /F1 7.00 Tf 50.00 356.34 Td (  replay/PnL analytics and model refinement.) Tj ET
-BT /F1 7.00 Tf 38.00 348.08 Td (- Built independent risk authority and adaptive execution around global capital, segment risk, quote freshness, spread/slippage gates, price adjustment,) Tj ET
-BT /F1 7.00 Tf 50.00 339.82 Td (  laddering and hard exits.) Tj ET
-BT /F2 8.00 Tf 38.00 326.22 Td (EDUCATION) Tj ET
-BT /F1 7.05 Tf 38.00 317.91 Td (B.Tech Information Technology, MPSTME.) Tj ET
+BT /F2 8.00 Tf 38.00 460.80 Td (PYTHON RESEARCH SYSTEMS) Tj ET
+BT /F1 7.00 Tf 38.00 452.54 Td (- Built Python research/control-plane systems for feature engineering, signal generation, backtesting, walk-forward validation, replay, portfolio) Tj ET
+BT /F1 7.00 Tf 50.00 444.28 Td (  experiments and reports.) Tj ET
+BT /F1 7.00 Tf 38.00 436.02 Td (- Used pandas/numpy/sklearn-style pipelines across returns, volatility, sector breadth, futures basis, IV/OI/Greeks, macro context, BTC-relative and) Tj ET
+BT /F1 7.00 Tf 50.00 427.76 Td (  cross-asset features.) Tj ET
+BT /F1 7.00 Tf 38.00 419.50 Td (- Built options/equity/crypto research flows covering model training, threshold selection, fee/slippage-aware simulation, risk overlays, daily/monthly) Tj ET
+BT /F1 7.00 Tf 50.00 411.24 Td (  summaries and dashboards.) Tj ET
+BT /F1 7.00 Tf 38.00 402.98 Td (- Integrated Python with Redis/PostgreSQL for market archives, live feature tables, state writers, bridge services, monitor APIs, reports and operational) Tj ET
+BT /F1 7.00 Tf 50.00 394.72 Td (  jobs.) Tj ET
+BT /F2 8.00 Tf 38.00 381.12 Td (C++ TRADING RUNTIME) Tj ET
+BT /F1 7.00 Tf 38.00 372.86 Td (- Built C++ live components for market/private sockets, order execution, position tracking, risk management, signal bridges, hot-state daemons and) Tj ET
+BT /F1 7.00 Tf 50.00 364.60 Td (  replay/parity tooling.) Tj ET
+BT /F1 7.00 Tf 38.00 356.34 Td (- Used Boost.Asio/Beast/OpenSSL, nlohmann::json, CMake, threads, atomics, mutexes, hiredis and libpq-style integrations across live/runtime paths.) Tj ET
+BT /F1 7.00 Tf 38.00 348.08 Td (- Implemented order preflight and smart-execution flows: account/instrument probes, Redis quote checks, quote freshness, slippage gates, duplicate-intent) Tj ET
+BT /F1 7.00 Tf 50.00 339.82 Td (  checks and exchange journals.) Tj ET
+BT /F1 7.00 Tf 38.00 331.56 Td (- Designed low-latency state handling with Redis streams/hashes, in-memory working-order state, heartbeats and durable PostgreSQL writes outside the) Tj ET
+BT /F1 7.00 Tf 50.00 323.30 Td (  execution path.) Tj ET
+BT /F2 8.00 Tf 38.00 309.70 Td (SELECTED PROJECT - VAJRA) Tj ET
+BT /F1 7.00 Tf 38.00 301.44 Td (- Built a personal multi-asset research/trading platform connecting Indian sectors, global indices, crude oil, FX, macro context, options/futures) Tj ET
+BT /F1 7.00 Tf 50.00 293.18 Td (  structure and crypto risk appetite.) Tj ET
+BT /F1 7.00 Tf 38.00 284.92 Td (- Implemented the research-to-execution loop: market data archive, feature engineering, signal ranking, risk decision, order intent, execution journal,) Tj ET
+BT /F1 7.00 Tf 50.00 276.66 Td (  replay/PnL analytics and model refinement.) Tj ET
+BT /F1 7.00 Tf 38.00 268.40 Td (- Built independent risk authority and adaptive execution around global capital, segment risk, quote freshness, spread/slippage gates, price adjustment,) Tj ET
+BT /F1 7.00 Tf 50.00 260.14 Td (  laddering and hard exits.) Tj ET
+BT /F2 8.00 Tf 38.00 246.54 Td (EDUCATION) Tj ET
+BT /F1 7.05 Tf 38.00 238.23 Td (B.Tech Information Technology, MPSTME.) Tj ET
 endstream
 endobj
 8 0 obj
@@ -85,9 +94,9 @@ xref
 0000000266 00000 n 
 0000000436 00000 n 
 0000000604 00000 n 
-0000006502 00000 n 
+0000007541 00000 n 
 trailer
 << /Size 9 /Root 1 0 R >>
 startxref
-6660
+7699
 %%EOF

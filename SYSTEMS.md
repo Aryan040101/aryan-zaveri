@@ -15,6 +15,30 @@ Python is the right tool for most of my research loop:
 
 The research idea is broad by design. I want models that understand what is happening globally and locally before acting. Examples include oil versus Indian sectors, US/China/Japan/Korea sector behavior versus Indian sectors, Indian and global macro context, futures/options structure, volatility, sector rotation, risk appetite and mean-reversion/momentum regimes.
 
+## Python Research Inventory
+
+I do not treat Python as just glue code. It is the research operating layer:
+
+- **Feature engineering:** OHLCV features, returns, realized volatility, momentum, RSI, volume ratios, futures basis, IV rank, IV term slope, PCR/OI, max-pain and gamma-distance style context, breadth, macro inputs, sector relationships and BTC-relative behavior.
+- **Signal research:** rule families, statistical models, rolling models, Kalman-style trend logic, LightGBM-style ensembles, options call/put selection, equity/futures side books and crypto relationship candidates.
+- **Validation:** completed-prior-data features, no-lookahead signal generation, train/test windows, walk-forward selection, out-of-sample metrics, replay, paper-fill simulation, fee/slippage assumptions and quality gates.
+- **Portfolio research:** green/red side books, combined portfolio comparisons, deployed-margin limits, sector caps, active-position limits, daily loss pauses, MTM curves, month summaries and capital-required views.
+- **Data services:** Redis stream consumers, Redis hashes/queues, bar writers, L1/L2 writers, PostgreSQL candle writers, instrument tables, feature-table builders and retention/repair jobs.
+- **Options research:** dataset builders, model bundles, threshold search, replay inference, live inference, feature-table daemons, Postgres inference storage and monitor views.
+- **Monitoring and reporting:** FastAPI-style dashboards, spread views, backfill-healing views, market briefs, operational reports, lifecycle journals and research-output inspection.
+
+The practical split is:
+
+```text
+Python: research, features, validation, reports, orchestration, monitoring
+C++: sockets, hot state, risk authority, order runtime, execution journals
+Redis: live shared state and queues
+PostgreSQL: durable market/research/execution records
+JSON: contracts between components
+```
+
+This lets research move quickly without hiding live-trading responsibilities inside notebooks or ad hoc scripts.
+
 ## Live Runtime
 
 Live systems should be small, fast and explicit. My preference is:

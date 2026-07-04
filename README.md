@@ -22,14 +22,15 @@ The Python side is also substantial. It is where I build feature tables, model p
 - **Cross-market research:** linking Indian markets with global indices, crude oil, FX, macro data, sector themes, options/futures behavior and crypto risk appetite.
 - **Storage and state:** Redis streams/hashes for hot state and queues; PostgreSQL writers for durable candles, instruments, Greeks, analytics, snapshots and research outputs.
 
-This repo is a public portfolio version: architecture notes, compact demos and resumes that focus on systems design, engineering judgment and research-to-execution thinking.
+This repo is a public portfolio version: runnable code, architecture notes and resumes that focus on systems design, engineering judgment and research-to-execution thinking.
 
 ## Code Map
 
-- [architecture/quant_systems_showcase.md](architecture/quant_systems_showcase.md): Python/C++/JSON system architecture and data flow.
-- [contracts/](contracts): public JSON contract examples for signals, risk decisions, order intents, execution events, portfolio state and replay summaries.
+- [examples/cpp_trading_runtime/](examples/cpp_trading_runtime): modular C++20 runtime with hot state, risk authority, order manager, worker queues, adaptive pricing and journals.
+- [architecture/quant_systems_showcase.md](architecture/quant_systems_showcase.md): Python/C++ system architecture and data flow.
 - [examples/research_to_execution_demo/](examples/research_to_execution_demo): Python research-to-execution replay with synthetic market data, lag-safe features, risk checks, fills and lifecycle events.
-- [examples/cpp_live_runtime_demo/](examples/cpp_live_runtime_demo): C++ live-runtime shape with queues, risk authority, order manager, adaptive pricing, journals and heartbeat output.
+- [examples/cpp_live_runtime_demo/](examples/cpp_live_runtime_demo): compact single-file C++ queue/risk/order runtime demo.
+- [contracts/](contracts): public message examples for signals, risk decisions, order intents, execution events, portfolio state and replay summaries.
 
 ## Public Examples
 
@@ -43,20 +44,37 @@ python3 examples/research_to_execution_demo/run_demo.py | python3 -m json.tool
 
 The larger Python shape includes research scripts, feature builders, options model pipelines, equity/futures portfolio analysis, crypto movement/relationship engines, Redis/Postgres data services, FastAPI-style monitors and scheduled reporting jobs.
 
-### C++ Live Runtime Shape
+### C++ Trading Runtime Demo
 
-The C++ example is a small public model of the live path: JSON signals, JSON risk contracts, an in-memory queue, an independent risk authority, adaptive order intent generation and execution journaling.
+The modular C++ example is the main runtime showcase. It splits the system into hot state, risk authority, order manager, queueing and journal components.
 
 ```bash
-g++ -std=c++20 -O2 -pthread examples/cpp_live_runtime_demo/live_runtime_demo.cpp -o /tmp/live_runtime_demo
-/tmp/live_runtime_demo
+g++ -std=c++20 -O2 -pthread -Iexamples/cpp_trading_runtime/include examples/cpp_trading_runtime/src/*.cpp -o /tmp/cpp_trading_runtime
+/tmp/cpp_trading_runtime | python3 -m json.tool
+```
+
+Or with CMake:
+
+```bash
+cmake -S examples/cpp_trading_runtime -B /tmp/cpp_trading_runtime_build
+cmake --build /tmp/cpp_trading_runtime_build
+/tmp/cpp_trading_runtime_build/cpp_trading_runtime | python3 -m json.tool
 ```
 
 The larger runtime shape behind this is closer to a production trading stack: socket processes, risk manager, order manager, market-state cache, Redis stream consumers, PostgreSQL persistence, heartbeats, snapshots, replay tooling and Linux services.
 
-### JSON Contract Validation
+### Compact C++ Runtime Shape
 
-The contract examples are validated in CI.
+The compact C++ example is a small public model of the live path: signals, risk limits, an in-memory queue, an independent risk authority, adaptive order intent generation and execution journaling.
+
+```bash
+g++ -std=c++20 -O2 -pthread examples/cpp_live_runtime_demo/live_runtime_demo.cpp -o /tmp/live_runtime_demo
+/tmp/live_runtime_demo | python3 -m json.tool
+```
+
+### Message Contract Validation
+
+The message examples are validated in CI.
 
 ```bash
 python3 tools/validate_contract_examples.py

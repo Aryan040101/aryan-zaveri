@@ -1,6 +1,6 @@
 # Quant Systems Showcase
 
-This repo presents a public, synthetic version of the architecture I build toward: research produces explicit decisions, risk is an independent authority, and live runtime components communicate through small JSON contracts.
+This repo presents a public, synthetic version of the architecture I build toward: research produces explicit decisions, risk is an independent authority, and live runtime components are implemented as narrow C++ services with clear message boundaries.
 
 ## System Shape
 
@@ -16,7 +16,7 @@ Python research layer
   - reports and dashboards
         |
         v
-JSON contracts
+message contracts
   - signal
   - risk decision
   - order intent
@@ -26,7 +26,8 @@ JSON contracts
         |
         v
 C++ runtime layer
-  - queues
+  - hot state store
+  - worker queues
   - risk authority
   - order manager
   - adaptive limit pricing
@@ -53,9 +54,9 @@ Python owns the research and control-plane surface:
 
 The public demo is in `examples/research_to_execution_demo/`.
 
-## JSON Layer
+## Message Layer
 
-JSON is the interface between research, risk and runtime. The examples in `contracts/` show the public shape of the messages:
+The message examples in `contracts/` show the public shape of the interfaces between research, risk and runtime:
 
 - `signal.json` represents a research output;
 - `risk_contract.json` represents limits owned by risk;
@@ -67,15 +68,17 @@ JSON is the interface between research, risk and runtime. The examples in `contr
 
 ## C++ Layer
 
-C++ owns the live-runtime shape:
+C++ owns the live-runtime shape. The main public example is `examples/cpp_trading_runtime/`, which uses a modular layout instead of one script:
 
-- queue signals into risk evaluation;
-- reserve risk budget before order intent creation;
-- build adaptive limit prices from contract limits;
-- pass accepted intents to the execution worker;
-- emit JSON events for risk decisions, order intents, fills, heartbeat and runtime state.
+- `runtime_types.hpp` defines signals, quotes, limits, decisions, orders, fills and positions;
+- `blocking_queue.hpp` provides the worker-queue primitive;
+- `hot_state.cpp` models Redis-like hot state for quotes, working orders and positions;
+- `risk_authority.cpp` owns quote freshness, confidence, notional and active-order gates;
+- `order_manager.cpp` builds/adapts order intents and simulates fills;
+- `journal.cpp` emits replayable lifecycle events;
+- `trading_runtime_main.cpp` wires the service loop together.
 
-The public demo is in `examples/cpp_live_runtime_demo/`.
+The compact single-file demo remains in `examples/cpp_live_runtime_demo/` for quick inspection.
 
 ## Boundary Discipline
 

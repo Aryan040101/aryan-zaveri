@@ -28,7 +28,13 @@ jobs:
       - name: Run C++ live runtime demo
         run: /tmp/live_runtime_demo | python -m json.tool > /tmp/live_runtime_demo.json
 
-      - name: Validate JSON contract examples
+      - name: Build modular C++ trading runtime
+        run: g++ -std=c++20 -O2 -Wall -Wextra -pedantic -pthread -Iexamples/cpp_trading_runtime/include examples/cpp_trading_runtime/src/*.cpp -o /tmp/cpp_trading_runtime
+
+      - name: Run modular C++ trading runtime
+        run: /tmp/cpp_trading_runtime | python -m json.tool > /tmp/cpp_trading_runtime.json
+
+      - name: Validate message contract examples
         run: python tools/validate_contract_examples.py
 
       - name: Run public repository checks

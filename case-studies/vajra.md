@@ -65,6 +65,8 @@ The engineering focus is on building the complete loop from ground level:
 - order lifecycle and execution evidence;
 - feedback into research.
 
+For a sanitized public illustration of this architecture pattern, see the runnable [Research-To-Execution Demo](../examples/research_to_execution_demo/README.md). The demo uses synthetic data and toy logic only.
+
 ## What This Demonstrates
 
 Vajra is evidence of:
@@ -81,4 +83,3 @@ Vajra is evidence of:
 - No institutional alpha claim.
 - No disclosure of proprietary alpha rules.
 - No raw order IDs, account details, credentials or broker secrets.
-

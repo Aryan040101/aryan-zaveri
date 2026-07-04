@@ -1,0 +1,27 @@
+name: public-repo-checks
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run demo tests
+        run: python -m unittest discover examples/research_to_execution_demo/tests
+
+      - name: Run synthetic demo
+        run: python examples/research_to_execution_demo/run_demo.py
+
+      - name: Run public repository checks
+        run: python tools/check_public_repo.py
+

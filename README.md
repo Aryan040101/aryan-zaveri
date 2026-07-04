@@ -14,6 +14,18 @@ I build systems that bring market context, data, features, signals, risk and exe
 - **Market-intelligence tooling:** context layers, dashboards, WebSocket/data contracts and research-facing interfaces.
 - **Evidence discipline:** clear separation between research, simulation, replay, paper/live activity and audited performance.
 
+## Runnable Public Demo
+
+This repository includes a sanitized research-to-execution demo using synthetic data and toy signal logic:
+
+```bash
+python3 examples/research_to_execution_demo/run_demo.py
+```
+
+It demonstrates the system shape behind my work: lag-safe features, signal scoring, pre-trade risk, order intents, deterministic fills, fees, slippage, replay accounting and summary metrics. It is not Vajra source code, not real alpha and not live trading infrastructure.
+
+Read the demo: [Research-To-Execution Demo](examples/research_to_execution_demo/README.md)
+
 ## Flagship Work: Vajra
 
 **Vajra** is my personal multi-asset quant research and execution platform. It is not a company and this repository does not expose proprietary strategy rules.
@@ -66,3 +78,4 @@ The goal of this repository is to show engineering and research capability witho
 
 Read the policy: [Evidence Policy](evidence/evidence-policy.md)
 
+Read the public evidence register: [Public Evidence Register](evidence/public-evidence-register.md)

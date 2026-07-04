@@ -2,7 +2,7 @@
 
 **Quant Developer | Trading Systems | Research Infrastructure | Execution-Aware Systems**
 
-[LinkedIn](https://www.linkedin.com/in/aryan-zaveri0401/) · [Public CV](resume/Aryan_Zaveri_Quant_Developer.pdf)
+[LinkedIn](https://www.linkedin.com/in/aryan-zaveri0401/) · [One-Page Resume](resume/Aryan_Zaveri_Quant_Developer_One_Page_Resume.pdf) · [Two-Page CV](resume/Aryan_Zaveri_Quant_Developer_Two_Page_CV.pdf)
 
 I build trading systems from the ground up: market data, feature engineering, strategy research, backtests, risk checks, order intent generation, execution tracking, replay, and post-trade analysis.
 

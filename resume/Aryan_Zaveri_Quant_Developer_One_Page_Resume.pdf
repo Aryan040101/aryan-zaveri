@@ -1,0 +1,85 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [8 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Type /Annot /Subtype /Link /Rect [38.00 734.59 224.12 744.79] /Border [0 0 0] /A << /S /URI /URI (https://www.linkedin.com/in/aryan-zaveri0401/) >> >>
+endobj
+6 0 obj
+<< /Type /Annot /Subtype /Link /Rect [38.00 726.10 210.58 736.30] /Border [0 0 0] /A << /S /URI /URI (https://github.com/Aryan040101/aryan-zaveri) >> >>
+endobj
+7 0 obj
+<< /Length 4824 >>
+stream
+BT /F2 13.50 Tf 38.00 754.00 Td (ARYAN ZAVERI) Tj ET
+BT /F1 8.40 Tf 38.00 744.09 Td (Quant Developer | Trading Systems | Research Infrastructure | Execution) Tj ET
+BT /F1 7.20 Tf 38.00 735.59 Td (LinkedIn: https://www.linkedin.com/in/aryan-zaveri0401/) Tj ET
+BT /F1 7.20 Tf 38.00 727.10 Td (GitHub: https://github.com/Aryan040101/aryan-zaveri) Tj ET
+BT /F2 8.00 Tf 38.00 713.50 Td (SUMMARY) Tj ET
+BT /F1 7.05 Tf 38.00 705.18 Td (Quantitative Developer focused on end-to-end trading infrastructure: market data, cross-asset research, backtesting, replay, risk decisions, order managers) Tj ET
+BT /F1 7.05 Tf 38.00 696.86 Td (and execution analytics. I use Python for research/backtesting and C++ for live socket, risk and order-runtime components, with JSON contracts, Redis hot) Tj ET
+BT /F1 7.05 Tf 38.00 688.54 Td (state and PostgreSQL persistence.) Tj ET
+BT /F2 8.00 Tf 38.00 674.94 Td (CORE SKILLS) Tj ET
+BT /F1 7.05 Tf 38.00 666.62 Td (Python, C++, SQL, Shell, JavaScript | Linux, AWS, Git, Docker | Redis, PostgreSQL, SQLite, JSON contracts | WebSockets, REST, broker/exchange APIs | Market) Tj ET
+BT /F1 7.05 Tf 38.00 658.30 Td (Data, Feature Engineering, Cross-Asset Research, Backtesting, Walk-Forward, Replay, Risk Managers, Order Managers, Execution Journals | Equities, Futures,) Tj ET
+BT /F1 7.05 Tf 38.00 649.98 Td (Options, Crypto) Tj ET
+BT /F2 8.00 Tf 38.00 636.38 Td (EXPERIENCE) Tj ET
+BT /F2 7.50 Tf 38.00 626.48 Td (GreyOak Capital - Quantitative Developer | Mar 2026 - Present) Tj ET
+BT /F1 7.00 Tf 38.00 618.22 Td (- Build quantitative research systems, market-intelligence infrastructure, market-data services, context-intelligence workflows and research-facing) Tj ET
+BT /F1 7.00 Tf 50.00 609.96 Td (  tooling.) Tj ET
+BT /F1 7.00 Tf 38.00 601.70 Td (- Work on Horizon, Compass, Context-Intelligence and Ask-GreyOak style systems that connect market context, internal data flows, dashboards,) Tj ET
+BT /F1 7.00 Tf 50.00 593.44 Td (  WebSocket/data contracts and analyst-facing interfaces.) Tj ET
+BT /F2 7.50 Tf 38.00 583.54 Td (KIFS Trade Capital - Quantitative / Algorithmic Trading Developer | 2024 - Mar 2026) Tj ET
+BT /F1 7.00 Tf 38.00 575.28 Td (- Built algorithmic trading tools, broker/API workflows, intraday market-data processing, conversion/reversion research utilities and execution) Tj ET
+BT /F1 7.00 Tf 50.00 567.02 Td (  analytics.) Tj ET
+BT /F1 7.00 Tf 38.00 558.76 Td (- Developed intraday/options analytics around tick/depth context, price action, option-chain features, IV/OI/Greeks-style inputs, signal filters and) Tj ET
+BT /F1 7.00 Tf 50.00 550.50 Td (  post-market validation.) Tj ET
+BT /F2 7.50 Tf 38.00 540.60 Td (Greeksoft Technologies - Algorithmic Trading Intern) Tj ET
+BT /F1 7.00 Tf 38.00 532.34 Td (- Worked around broker-facing algorithmic trading platform workflows: broker connectivity, instrument mapping, market data, order placement, order status) Tj ET
+BT /F1 7.00 Tf 50.00 524.08 Td (  and execution flow.) Tj ET
+BT /F2 8.00 Tf 38.00 510.48 Td (VAJRA - PERSONAL MULTI-ASSET RESEARCH AND TRADING INFRASTRUCTURE) Tj ET
+BT /F1 7.00 Tf 38.00 502.22 Td (- Built Vajra to connect Indian sectors, global indices, crude oil, FX, macro context, options/futures structure and crypto risk appetite into models) Tj ET
+BT /F1 7.00 Tf 50.00 493.96 Td (  that can be researched, backtested, replayed and wired into risk-aware execution.) Tj ET
+BT /F1 7.00 Tf 38.00 485.70 Td (- Use Python mainly for research, backtesting, walk-forward studies, replay and analytics; use C++ for live socket, risk-manager and order-manager style) Tj ET
+BT /F1 7.00 Tf 50.00 477.44 Td (  runtime components.) Tj ET
+BT /F1 7.00 Tf 38.00 469.18 Td (- Designed JSON contracts between research, risk, execution and journals; Redis hot state for queues/streams/positions/heartbeats; PostgreSQL writers for) Tj ET
+BT /F1 7.00 Tf 50.00 460.92 Td (  durable candles, instruments, Greeks, snapshots and reports.) Tj ET
+BT /F1 7.00 Tf 38.00 452.66 Td (- Built a single independent risk authority around global capital, segment risk, side/symbol exposure, active-order limits, quote freshness, drawdown) Tj ET
+BT /F1 7.00 Tf 50.00 444.40 Td (  controls and hard exits.) Tj ET
+BT /F1 7.00 Tf 38.00 436.14 Td (- Worked on adaptive entries/exits: spread and slippage gates, price leaning, replace/adjust loops, chunking, ladder exits,) Tj ET
+BT /F1 7.00 Tf 50.00 427.88 Td (  take-profit/stop-loss/trailing logic and replay-based refinement.) Tj ET
+BT /F2 8.00 Tf 38.00 414.28 Td (EDUCATION) Tj ET
+BT /F1 7.05 Tf 38.00 405.96 Td (B.Tech Information Technology, MPSTME, 2024.) Tj ET
+BT /F2 8.00 Tf 38.00 392.36 Td (EVIDENCE BOUNDARY) Tj ET
+BT /F1 7.05 Tf 38.00 384.04 Td (Research, simulation, replay, paper-fill and live-runtime activity are separated clearly. Audited live profitability is not claimed.) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R /Annots [5 0 R 6 0 R] >>
+endobj
+xref
+0 9
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000191 00000 n 
+0000000266 00000 n 
+0000000436 00000 n 
+0000000604 00000 n 
+0000005480 00000 n 
+trailer
+<< /Size 9 /Root 1 0 R >>
+startxref
+5638
+%%EOF

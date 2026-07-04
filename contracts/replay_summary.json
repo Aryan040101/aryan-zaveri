@@ -1,0 +1,16 @@
+{
+  "contract": "replay_summary",
+  "version": "public.v1",
+  "event": "replay_summary",
+  "evidence_type": "synthetic_demo",
+  "trades": 22,
+  "accepted_intents": 22,
+  "rejected_intents": 84,
+  "win_rate": 0.4545,
+  "gross_pnl": -219.836,
+  "fees": 140.9626,
+  "slippage_cost": 105.7219,
+  "net_pnl": -360.7986,
+  "max_drawdown": -0.0117,
+  "final_equity": 99568.8445
+}

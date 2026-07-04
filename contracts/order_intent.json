@@ -1,0 +1,12 @@
+{
+  "contract": "order_intent",
+  "version": "public.v1",
+  "event": "order_intent",
+  "symbol": "INDIA_EQ",
+  "side": "BUY",
+  "action": "OPEN",
+  "quantity": 160,
+  "reference_price": 100,
+  "limit_price": 100.02,
+  "reason": "accepted"
+}

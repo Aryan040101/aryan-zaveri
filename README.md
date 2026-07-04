@@ -24,14 +24,21 @@ The Python side is also substantial. It is where I build feature tables, model p
 
 This repo is a public portfolio version: architecture notes, compact demos and resumes that focus on systems design, engineering judgment and research-to-execution thinking.
 
+## Code Map
+
+- [architecture/quant_systems_showcase.md](architecture/quant_systems_showcase.md): Python/C++/JSON system architecture and data flow.
+- [contracts/](contracts): public JSON contract examples for signals, risk decisions, order intents, execution events, portfolio state and replay summaries.
+- [examples/research_to_execution_demo/](examples/research_to_execution_demo): Python research-to-execution replay with synthetic market data, lag-safe features, risk checks, fills and lifecycle events.
+- [examples/cpp_live_runtime_demo/](examples/cpp_live_runtime_demo): C++ live-runtime shape with queues, risk authority, order manager, adaptive pricing, journals and heartbeat output.
+
 ## Public Examples
 
 ### Python Research / Backtest Demo
 
-The Python example is deliberately offline. It shows how I think about completed-prior-data features, signal scoring, pre-trade risk, deterministic fills, fees, slippage, replay accounting and summary metrics.
+The Python example is deliberately offline. It shows how I think about completed-prior-data features, signal scoring, pre-trade risk, deterministic fills, fees, slippage, replay accounting, portfolio state and JSON lifecycle events.
 
 ```bash
-python3 examples/research_to_execution_demo/run_demo.py
+python3 examples/research_to_execution_demo/run_demo.py | python3 -m json.tool
 ```
 
 The larger Python shape includes research scripts, feature builders, options model pipelines, equity/futures portfolio analysis, crypto movement/relationship engines, Redis/Postgres data services, FastAPI-style monitors and scheduled reporting jobs.
@@ -46,6 +53,14 @@ g++ -std=c++20 -O2 -pthread examples/cpp_live_runtime_demo/live_runtime_demo.cpp
 ```
 
 The larger runtime shape behind this is closer to a production trading stack: socket processes, risk manager, order manager, market-state cache, Redis stream consumers, PostgreSQL persistence, heartbeats, snapshots, replay tooling and Linux services.
+
+### JSON Contract Validation
+
+The contract examples are validated in CI.
+
+```bash
+python3 tools/validate_contract_examples.py
+```
 
 ## Flagship Work: Vajra
 

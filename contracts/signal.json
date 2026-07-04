@@ -1,0 +1,19 @@
+{
+  "contract": "signal",
+  "version": "public.v1",
+  "event": "signal_generated",
+  "source": "python_research_demo",
+  "symbol": "INDIA_EQ",
+  "market": "equity",
+  "timeframe": "intraday",
+  "side": "BUY",
+  "score": 0.0042,
+  "confidence": 0.71,
+  "features": {
+    "target_ret_3": 0.0061,
+    "global_ret_3": 0.0048,
+    "oil_ret_3": -0.0015,
+    "target_vol_6": 0.0032,
+    "context_spread": 0.0055
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "contract": "risk_decision",
+  "version": "public.v1",
+  "event": "risk_decision",
+  "symbol": "INDIA_EQ",
+  "side": "BUY",
+  "accepted": true,
+  "reason": "accepted",
+  "quantity": 160,
+  "projected_notional": 16000,
+  "checks": {
+    "global_capital": "pass",
+    "segment_capital": "pass",
+    "drawdown_pause": "pass",
+    "duplicate_position": "pass"
+  }
+}

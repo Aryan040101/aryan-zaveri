@@ -1,0 +1,15 @@
+{
+  "contract": "portfolio_state",
+  "version": "public.v1",
+  "event": "portfolio_state",
+  "equity": 100250.5,
+  "peak_equity": 100500,
+  "current_drawdown": -0.0025,
+  "realized_pnl": 250.5,
+  "open_position": {
+    "symbol": "INDIA_EQ",
+    "side": "BUY",
+    "quantity": 160,
+    "entry_price": 100.03
+  }
+}

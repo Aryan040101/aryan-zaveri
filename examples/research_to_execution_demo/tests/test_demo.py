@@ -95,12 +95,24 @@ class DemoTests(unittest.TestCase):
     def test_replay_result_shape_is_public_safe(self) -> None:
         result = run_replay(generate_market(length=80, seed=3))
         self.assertIn("summary", result)
+        self.assertIn("portfolio_state", result)
+        self.assertIn("events", result)
         self.assertIn("trades", result)
         self.assertEqual(result["summary"]["evidence_type"], "synthetic_demo")
         self.assertEqual(result["summary"]["not_claimed"], "real alpha or live performance")
+        self.assertEqual(result["portfolio_state"]["event"], "portfolio_state")
+        self.assertGreater(len(result["events"]), 0)
         self.assertIsInstance(result["trades"], list)
+
+    def test_lifecycle_events_cover_research_risk_and_execution(self) -> None:
+        result = run_replay(generate_market(length=120, seed=5))
+        event_names = {event["event"] for event in result["events"]}
+        self.assertIn("signal_generated", event_names)
+        self.assertIn("risk_decision", event_names)
+        self.assertIn("order_intent", event_names)
+        self.assertIn("execution_fill", event_names)
+        self.assertIn("position_update", event_names)
 
 
 if __name__ == "__main__":
     unittest.main()
-

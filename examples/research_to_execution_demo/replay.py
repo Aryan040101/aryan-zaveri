@@ -12,6 +12,26 @@ from risk import RiskLimits, evaluate_signal
 from signals import score_signal
 
 
+def _side_name(side: int) -> str:
+    return "BUY" if side > 0 else "SELL"
+
+
+def _rounded_features(features: dict[str, float]) -> dict[str, float]:
+    return {key: round(float(value), 8) for key, value in features.items()}
+
+
+def _position_snapshot(position: "Position | None") -> dict | None:
+    if position is None:
+        return None
+    return {
+        "symbol": position.symbol,
+        "side": _side_name(position.side),
+        "quantity": position.quantity,
+        "entry_price": round(position.entry_price, 4),
+        "entry_t": position.entry_t,
+    }
+
+
 @dataclass
 class Position:
     symbol: str
@@ -53,6 +73,7 @@ def run_replay(frames: list[MarketFrame], limits: RiskLimits | None = None, max_
 
     limits = limits or RiskLimits()
     state = ReplayState()
+    events: list[dict] = []
     trades: list[dict] = []
     equity_curve: list[float] = [state.starting_equity]
     accepted = 0
@@ -68,6 +89,18 @@ def run_replay(frames: list[MarketFrame], limits: RiskLimits | None = None, max_
 
         features = build_features(frames, index)
         signal = score_signal(decision_frame.t, TARGET, features)
+        if signal.direction != 0:
+            events.append(
+                {
+                    "event": "signal_generated",
+                    "t": signal.t,
+                    "symbol": signal.symbol,
+                    "side": _side_name(signal.direction),
+                    "score": signal.score,
+                    "reason": signal.reason,
+                    "features": _rounded_features(features),
+                }
+            )
 
         if state.position is not None and _should_close(state.position, signal.direction, decision_frame.t, max_hold):
             position = state.position
@@ -80,7 +113,34 @@ def run_replay(frames: list[MarketFrame], limits: RiskLimits | None = None, max_
                 reference_price=decision_price,
                 reason="opposite_signal_or_time_exit",
             )
+            events.append(
+                {
+                    "event": "order_intent",
+                    "t": intent.t,
+                    "symbol": intent.symbol,
+                    "action": intent.action,
+                    "side": _side_name(intent.side),
+                    "quantity": intent.quantity,
+                    "reference_price": round(intent.reference_price, 4),
+                    "reason": intent.reason,
+                }
+            )
             fill = simulate_fill(intent, fill_price)
+            events.append(
+                {
+                    "event": "execution_fill",
+                    "t": fill.t,
+                    "symbol": fill.symbol,
+                    "action": fill.action,
+                    "side": _side_name(fill.side),
+                    "quantity": fill.quantity,
+                    "reference_price": fill.reference_price,
+                    "fill_price": fill.fill_price,
+                    "fee": fill.fee,
+                    "slippage_cost": fill.slippage_cost,
+                    "source": "synthetic_execution_engine",
+                }
+            )
             gross = position.side * (fill.fill_price - position.entry_price) * position.quantity
             fees = position.entry_fee + fill.fee
             slippage = position.entry_slippage + fill.slippage_cost
@@ -100,9 +160,31 @@ def run_replay(frames: list[MarketFrame], limits: RiskLimits | None = None, max_
             )
             state.position = None
             state.mark(fill_price)
+            events.append(
+                {
+                    "event": "position_update",
+                    "t": fill.t,
+                    "position": None,
+                    "equity": round(state.equity, 4),
+                    "realized_pnl": round(state.realized_pnl, 4),
+                }
+            )
             equity_curve.append(state.equity)
 
         decision = evaluate_signal(signal, state, decision_price, limits)
+        if signal.direction != 0:
+            events.append(
+                {
+                    "event": "risk_decision",
+                    "t": signal.t,
+                    "symbol": signal.symbol,
+                    "side": _side_name(signal.direction),
+                    "accepted": decision.accepted,
+                    "reason": decision.reason,
+                    "quantity": decision.quantity,
+                    "projected_notional": round(decision.projected_notional, 4),
+                }
+            )
         if decision.accepted:
             intent = OrderIntent(
                 t=fill_frame.t,
@@ -113,7 +195,34 @@ def run_replay(frames: list[MarketFrame], limits: RiskLimits | None = None, max_
                 reference_price=decision_price,
                 reason=signal.reason,
             )
+            events.append(
+                {
+                    "event": "order_intent",
+                    "t": intent.t,
+                    "symbol": intent.symbol,
+                    "action": intent.action,
+                    "side": _side_name(intent.side),
+                    "quantity": intent.quantity,
+                    "reference_price": round(intent.reference_price, 4),
+                    "reason": intent.reason,
+                }
+            )
             fill = simulate_fill(intent, fill_price)
+            events.append(
+                {
+                    "event": "execution_fill",
+                    "t": fill.t,
+                    "symbol": fill.symbol,
+                    "action": fill.action,
+                    "side": _side_name(fill.side),
+                    "quantity": fill.quantity,
+                    "reference_price": fill.reference_price,
+                    "fill_price": fill.fill_price,
+                    "fee": fill.fee,
+                    "slippage_cost": fill.slippage_cost,
+                    "source": "synthetic_execution_engine",
+                }
+            )
             state.realized_pnl -= fill.fee
             state.position = Position(
                 symbol=TARGET,
@@ -126,6 +235,15 @@ def run_replay(frames: list[MarketFrame], limits: RiskLimits | None = None, max_
             )
             accepted += 1
             state.mark(fill_price)
+            events.append(
+                {
+                    "event": "position_update",
+                    "t": fill.t,
+                    "position": _position_snapshot(state.position),
+                    "equity": round(state.equity, 4),
+                    "realized_pnl": round(state.realized_pnl, 4),
+                }
+            )
             equity_curve.append(state.equity)
         elif signal.direction != 0:
             rejected += 1
@@ -144,6 +262,33 @@ def run_replay(frames: list[MarketFrame], limits: RiskLimits | None = None, max_
                 reason="final_flatten",
             ),
             final_frame.prices[TARGET],
+        )
+        events.append(
+            {
+                "event": "order_intent",
+                "t": fill.t,
+                "symbol": fill.symbol,
+                "action": fill.action,
+                "side": _side_name(fill.side),
+                "quantity": fill.quantity,
+                "reference_price": fill.reference_price,
+                "reason": "final_flatten",
+            }
+        )
+        events.append(
+            {
+                "event": "execution_fill",
+                "t": fill.t,
+                "symbol": fill.symbol,
+                "action": fill.action,
+                "side": _side_name(fill.side),
+                "quantity": fill.quantity,
+                "reference_price": fill.reference_price,
+                "fill_price": fill.fill_price,
+                "fee": fill.fee,
+                "slippage_cost": fill.slippage_cost,
+                "source": "synthetic_execution_engine",
+            }
         )
         gross = position.side * (fill.fill_price - position.entry_price) * position.quantity
         fees = position.entry_fee + fill.fee
@@ -164,10 +309,31 @@ def run_replay(frames: list[MarketFrame], limits: RiskLimits | None = None, max_
         )
         state.position = None
         state.mark(final_frame.prices[TARGET])
+        events.append(
+            {
+                "event": "position_update",
+                "t": fill.t,
+                "position": None,
+                "equity": round(state.equity, 4),
+                "realized_pnl": round(state.realized_pnl, 4),
+            }
+        )
         equity_curve.append(state.equity)
 
     summary = summarize(trades, equity_curve, accepted, rejected)
     summary["evidence_type"] = "synthetic_demo"
     summary["not_claimed"] = "real alpha or live performance"
-    return {"summary": summary, "trades": trades}
-
+    portfolio_state = {
+        "event": "portfolio_state",
+        "equity": round(state.equity, 4),
+        "peak_equity": round(state.peak_equity, 4),
+        "current_drawdown": round(state.current_drawdown, 4),
+        "realized_pnl": round(state.realized_pnl, 4),
+        "open_position": _position_snapshot(state.position),
+    }
+    return {
+        "summary": summary,
+        "portfolio_state": portfolio_state,
+        "events": events,
+        "trades": trades,
+    }

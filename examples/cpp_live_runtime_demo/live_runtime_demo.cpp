@@ -201,6 +201,13 @@ public:
         out << "    \"accepted\": " << accepted << ",\n";
         out << "    \"rejected\": " << rejected << ",\n";
         out << "    \"filled\": " << filled << "\n";
+        out << "  },\n";
+        out << "  \"runtime_state\": {\n";
+        out << "    \"contracts\": \"json_file\",\n";
+        out << "    \"signal_source\": \"json_file\",\n";
+        out << "    \"risk_authority\": \"enabled\",\n";
+        out << "    \"order_manager\": \"synthetic_execution_engine\",\n";
+        out << "    \"hot_state\": \"in_memory_queues\"\n";
         out << "  }\n";
         out << "}\n";
         return out.str();
@@ -312,6 +319,16 @@ std::string fill_event_json(const OrderIntent& intent, double fill_price) {
     return out.str();
 }
 
+std::string heartbeat_event_json(const std::string& component, const std::string& status) {
+    std::ostringstream out;
+    out << "{";
+    out << "\"event\":\"heartbeat\",";
+    out << "\"component\":" << quoted(component) << ",";
+    out << "\"status\":" << quoted(status);
+    out << "}";
+    return out.str();
+}
+
 OrderIntent build_intent(const Signal& signal, const RiskDecision& decision, double max_slippage_bps) {
     return OrderIntent{
         signal.symbol,
@@ -348,6 +365,7 @@ int main(int argc, char** argv) {
     std::atomic<int> accepted{0};
     std::atomic<int> rejected{0};
     std::atomic<int> filled{0};
+    journal.append(heartbeat_event_json("cpp_live_runtime_demo", "started"));
 
     std::thread risk_worker([&] {
         while (auto signal = signal_queue.pop()) {
@@ -381,6 +399,7 @@ int main(int argc, char** argv) {
 
     risk_worker.join();
     execution_worker.join();
+    journal.append(heartbeat_event_json("cpp_live_runtime_demo", "stopped"));
 
     std::cout << journal.to_json(accepted.load(), rejected.load(), filled.load());
     return 0;

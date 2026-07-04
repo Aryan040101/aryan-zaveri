@@ -1,0 +1,14 @@
+{
+  "contract": "execution_event",
+  "version": "public.v1",
+  "event": "execution_fill",
+  "symbol": "INDIA_EQ",
+  "side": "BUY",
+  "action": "OPEN",
+  "quantity": 160,
+  "reference_price": 100,
+  "fill_price": 100.03,
+  "fee": 3.2,
+  "slippage_cost": 4.8,
+  "source": "synthetic_execution_engine"
+}

@@ -39,6 +39,13 @@ JSON: contracts between components
 
 This lets research move quickly without hiding live-trading responsibilities inside notebooks or ad hoc scripts.
 
+The public repo now mirrors that split in code:
+
+- Python lifecycle replay: `examples/research_to_execution_demo/`
+- C++ runtime demo: `examples/cpp_live_runtime_demo/`
+- JSON contract examples: `contracts/`
+- Architecture flow: `architecture/quant_systems_showcase.md`
+
 ## Live Runtime
 
 Live systems should be small, fast and explicit. My preference is:
@@ -51,6 +58,8 @@ Live systems should be small, fast and explicit. My preference is:
 The boundary is intentional: Python can research and simulate; C++ should own the live loop.
 
 In my own naming, the live path maps naturally to components like `socket.cpp`, `risk.cpp`, order manager, risk manager, Redis writers/readers and PostgreSQL writers. The public example keeps the same shape: JSON in, risk authority, order intent, execution event, JSON out.
+
+The public C++ demo also emits heartbeat and runtime-state output so the example reads like a service, not just a calculation.
 
 ## C++ Runtime Inventory
 

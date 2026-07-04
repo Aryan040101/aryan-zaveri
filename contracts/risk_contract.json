@@ -1,0 +1,11 @@
+{
+  "contract": "risk_contract",
+  "version": "public.v1",
+  "global_capital_limit": 100000,
+  "cash_segment_limit": 40000,
+  "derivatives_segment_limit": 60000,
+  "max_order_notional": 25000,
+  "max_drawdown": 0.06,
+  "min_confidence": 0.6,
+  "max_slippage_bps": 5
+}

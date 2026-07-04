@@ -6,11 +6,11 @@
 
 I build trading systems from the ground up: market data, feature engineering, strategy research, backtests, risk checks, order intent generation, execution tracking, replay, and post-trade analysis.
 
-My strongest work is end-to-end quant infrastructure. I use Python for the research and control-plane layer: data loading, feature engineering, signal research, ML-style experiments, backtesting, walk-forward validation, replay, reporting, monitoring and orchestration. I use C++ for live/runtime systems where latency, memory use, sockets, queues, order state and risk authority matter. The systems communicate through JSON contracts, keep hot state in Redis, and persist historical/research state into PostgreSQL or Timescale-style stores.
+My strongest work is end-to-end quant infrastructure. I use Python to research, test and analyse ideas. I use C++ for the live path where sockets, queues, memory, order state and risk decisions need to stay tight.
 
-The C++ side is not a small add-on. It is the live/runtime layer: market sockets, private order sockets, risk managers, order managers, signal bridges, position trackers, Redis hot-state workers, PostgreSQL writers, replay/parity tools and service processes that can run under Linux/systemd.
+On the C++ side, I have worked on the parts that sit close to execution: market and private sockets, risk managers, order managers, signal bridges, position tracking, Redis hot state, PostgreSQL writers, replay/parity tools and Linux services.
 
-The Python side is also substantial. It is where I build feature tables, model pipelines, options/equity/crypto research flows, no-lookahead backtests, walk-forward studies, risk grids, portfolio comparisons, dashboards, data repair jobs, Redis/Postgres writers and operational monitors.
+On the Python side, most of the work is research and control-plane: feature tables, model pipelines, options/equity/crypto research, no-lookahead backtests, walk-forward checks, risk grids, portfolio comparisons, dashboards, repair jobs and monitoring.
 
 ## What I Build
 
@@ -22,7 +22,7 @@ The Python side is also substantial. It is where I build feature tables, model p
 - **Cross-market research:** linking Indian markets with global indices, crude oil, FX, macro data, sector themes, options/futures behavior and crypto risk appetite.
 - **Storage and state:** Redis streams/hashes for hot state and queues; PostgreSQL writers for durable candles, instruments, Greeks, analytics, snapshots and research outputs.
 
-This repo is a public portfolio version: runnable code, architecture notes and resumes that focus on systems design, engineering judgment and research-to-execution thinking.
+This repo is where I am putting a public version of the work: runnable examples, architecture notes and resumes.
 
 ## Code Map
 
@@ -37,17 +37,17 @@ This repo is a public portfolio version: runnable code, architecture notes and r
 
 ### Python Research System
 
-The modular Python example is the main research/control-plane showcase. It splits the workflow into market data, lag-safe features, signal scoring, walk-forward validation, risk, portfolio accounting, execution simulation, replay and reporting.
+The modular Python example shows the research/control-plane side. It breaks the workflow into market data, lag-safe features, signal scoring, walk-forward validation, risk, portfolio accounting, execution simulation, replay and reporting.
 
 ```bash
 python3 examples/python_research_system/run_system.py | python3 -m json.tool
 ```
 
-The larger Python shape includes research scripts, feature builders, options model pipelines, equity/futures portfolio analysis, crypto movement/relationship engines, Redis/Postgres data services, FastAPI-style monitors and scheduled reporting jobs.
+The actual Python work goes further than this demo: research scripts, feature builders, options model pipelines, equity/futures portfolio analysis, crypto relationship engines, Redis/Postgres data services, monitors and scheduled reports.
 
 ### Compact Python Research / Backtest Demo
 
-The compact Python example is deliberately offline. It shows completed-prior-data features, signal scoring, pre-trade risk, deterministic fills, fees, slippage, replay accounting, portfolio state and lifecycle events.
+The compact Python example is a smaller offline version: completed-prior-data features, signal scoring, pre-trade risk, deterministic fills, fees, slippage, replay accounting, portfolio state and lifecycle events.
 
 ```bash
 python3 examples/research_to_execution_demo/run_demo.py | python3 -m json.tool
@@ -55,7 +55,7 @@ python3 examples/research_to_execution_demo/run_demo.py | python3 -m json.tool
 
 ### C++ Trading Runtime Demo
 
-The modular C++ example is the main runtime showcase. It splits the system into hot state, risk authority, order manager, queueing and journal components.
+The modular C++ example shows the runtime side. It splits the system into hot state, risk authority, order manager, queueing and journal components.
 
 ```bash
 g++ -std=c++20 -O2 -pthread -Iexamples/cpp_trading_runtime/include examples/cpp_trading_runtime/src/*.cpp -o /tmp/cpp_trading_runtime
@@ -70,7 +70,7 @@ cmake --build /tmp/cpp_trading_runtime_build
 /tmp/cpp_trading_runtime_build/cpp_trading_runtime | python3 -m json.tool
 ```
 
-The larger runtime shape behind this is closer to a production trading stack: socket processes, risk manager, order manager, market-state cache, Redis stream consumers, PostgreSQL persistence, heartbeats, snapshots, replay tooling and Linux services.
+The actual runtime work goes further than this demo: socket processes, risk manager, order manager, market-state cache, Redis stream consumers, PostgreSQL persistence, heartbeats, snapshots, replay tooling and Linux services.
 
 ### Compact C++ Runtime Shape
 
